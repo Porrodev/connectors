@@ -1,0 +1,50 @@
+{
+    "name": "porro/connectors",
+    "description": "Monorepo for the open-source Porro connectors. Each package is split to its own read-only repository for Packagist.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "composer-runtime-api": "^2.2",
+        "paragonie/sodium_compat": "^1.21|^2.0",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "illuminate/console": "^11.0|^12.0|^13.0",
+        "illuminate/http": "^11.0|^12.0|^13.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "pestphp/pest": "^3.0|^4.0",
+        "laravel/pint": "^1.18"
+    },
+    "replace": {
+        "porro/php-core": "self.version",
+        "porro/laravel-connector": "self.version",
+        "porro/filament-connector": "self.version",
+        "porro/statamic-connector": "self.version"
+    },
+    "autoload": {
+        "psr-4": {
+            "Porro\\Core\\": "packages/php-core/src/",
+            "Porro\\Laravel\\": "packages/laravel-connector/src/",
+            "Porro\\Filament\\": "packages/filament-connector/src/",
+            "Porro\\Statamic\\": "packages/statamic-connector/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Porro\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "pest",
+        "lint": "pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

@@ -1,0 +1,26 @@
+{
+    "name": "porro/laravel-connector",
+    "description": "Read-only Porro connector for Laravel: versions, advisories, scheduler, queues, migrations and backups.",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://porro.dev",
+    "keywords": ["porro", "laravel", "monitoring", "security"],
+    "require": {
+        "php": "^8.2",
+        "porro/php-core": "self.version",
+        "illuminate/support": "^11.0|^12.0|^13.0",
+        "illuminate/console": "^11.0|^12.0|^13.0",
+        "illuminate/http": "^11.0|^12.0|^13.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Porro\\Laravel\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": ["Porro\\Laravel\\PorroServiceProvider"]
+        }
+    },
+    "minimum-stability": "stable"
+}
