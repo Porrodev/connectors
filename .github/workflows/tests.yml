@@ -16,6 +16,13 @@ jobs:
       matrix:
         php: ['8.2', '8.3', '8.4', '8.5']
         laravel: ['11.*', '12.*', '13.*']
+        include:
+          - laravel: '11.*'
+            testbench: '9.*'
+          - laravel: '12.*'
+            testbench: '10.*'
+          - laravel: '13.*'
+            testbench: '11.*'
         exclude:
           - php: '8.2'
             laravel: '13.*'
@@ -27,9 +34,14 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: sodium, pdo_sqlite
           coverage: none
+      # Laravel 11 is past security support, so Composer blocks it by default.
+      # The connector still supports it: those are the sites Porro flags.
+      - name: Allow end-of-life Laravel
+        if: matrix.laravel == '11.*'
+        run: composer config audit.block-insecure false
       - name: Install
         run: |
-          composer require "illuminate/support:${{ matrix.laravel }}" --no-update --no-interaction
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --dev --no-update --no-interaction
           composer update --prefer-dist --no-interaction --no-progress
       - name: Test
         run: vendor/bin/pest
